@@ -67,3 +67,17 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: Add comment with link to SonarCloud report
+      if: github.event_name == 'pull_request_target'
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'SonarCloud Analysis will be available: https://sonarcloud.io/dashboard?id=gh-sonar-noapp-int-test&pullRequest=' + context.issue.number
+            })
+
+
