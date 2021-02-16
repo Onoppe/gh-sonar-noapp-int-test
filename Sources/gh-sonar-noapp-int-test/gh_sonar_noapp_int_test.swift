@@ -5,5 +5,5 @@ struct gh_sonar_noapp_int_test {
 }
 
 struct HelloWorld {
-    var text = "Hello, World!"
+    var text = "Hello, World :)"
 }
