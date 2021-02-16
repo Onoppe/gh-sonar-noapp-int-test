@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build and Test on iOS 14 with Xcode 12
-      run: set -o pipefail && codebuild -scheme gh-sonar-noapp-int-test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' clean build test | xcpretty
+      run: set -o pipefail && xcodebuild -scheme gh-sonar-noapp-int-test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' clean build test | xcpretty
     - name: Create code coverage report
       run: ./scripts/xccov-to-sonarqube-generic.sh /Users/runner/Library/Developer/Xcode/DerivedData/gh-sonar-noapp-int-test*/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml
     - name: Store coverage for sonar job
